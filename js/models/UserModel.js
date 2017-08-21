@@ -9,7 +9,7 @@ class UserModel {
         this.transHist = [];
     }
 
-    makeUser(fName, lName, birthDate, createDate, isAdmin, currentRentals, transHist){
+    CreateUser(fName, lName, birthDate, createDate, isAdmin, currentRentals, transHist){
         this.fName = fName;
         this.lName = lName;
         this.birthDate = birthDate;
@@ -20,7 +20,7 @@ class UserModel {
         return this;
 
     }
-    toModel(){
+    ToModel(){
         return{
             'FirstName' : this.fName,
             'LastName' : this.lName,
