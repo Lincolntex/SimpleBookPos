@@ -9,6 +9,7 @@
 const express = require('express')
 const app = express()
 var path = require('path');
+var dbTest = require('./js/DatabaseManager.js');
 
 // tell the server which files we want to serve and where they are located
 app.use("/styles", express.static(__dirname + '/styles')); // where we create our own custom css
