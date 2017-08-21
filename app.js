@@ -9,7 +9,11 @@
 const express = require('express')
 const app = express()
 var path = require('path');
-var dbTest = require('./js/DatabaseManager.js');
+var DatabaseManager = require('./js/DatabaseManager.js').DataBaseManager;
+var db = new DatabaseManager();
+var TestSuiteManager = require('./js/tests/TestingSuite.js').TestingSuite;
+var TestSuite = new TestSuiteManager();
+
 
 // tell the server which files we want to serve and where they are located
 app.use("/styles", express.static(__dirname + '/styles')); // where we create our own custom css
@@ -24,17 +28,6 @@ app.get('/', function(req, res) {
 // tell the server to start listening to requests at "localhost:3000/"
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
-  // var dbfile = require('./js/DataBaseManager.js').DataBaseManager;
-  // var db = new dbfile();
-  // var UserModel = require('./js/models/UserModel.js').UserModel;
-  // var User = new UserModel().makeUser('Me', 'Doe', '12', '06', true, [4], [7])
-
-  // db.insertUser(User, function(err, res){
-  //   if(err){
-  //     console.error("[app] error - "+ err)
-  //   }
-  //   else{
-  //     console.log(res);
-  //   }
-  // })
+  TestSuite.RunTestSuite()
+  TestSuite.RunRandomTest();
 })
