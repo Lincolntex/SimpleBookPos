@@ -43,14 +43,13 @@ class BookModel {
     _TestModel() {
         let rnd = Math.random() * (1000 - 1) + 1;
 
-        return {
-            'Title' : 'Title_' + rnd,
-            'Author' : 'Author_' + rnd,
-            'Artist' : 'Artist_' + rnd,
-            'Sku10' : rnd,
-            'Sku13' : rnd + 100,
-            'Quantity' : rnd + 5
-        }
+        this.Title = 'Title_' + rnd,
+        this.Author = 'Author_' + rnd,
+        this.Artist = 'Artist_' + rnd,
+        this.Sku10 = rnd,
+        this.Sku13 = rnd + 100,
+        this.Author = rnd + 5
+        return this;
     }
 }
 

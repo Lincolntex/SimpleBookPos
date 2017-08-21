@@ -31,14 +31,13 @@ class AppointmentModel {
     _TestModel() {
         let rnd = Math.random() * (1000 - 1) + 1;
 
-        return {
-            'Title' : 'Title_' + rnd,
-            'CreationTime' : Date.now(),
-            'ScheduledTime' : Date.now(),
-            'IsComplete' : (rnd % 2 == 0) ? true : false,
-            'Estimate' : rnd,
-            'FinalCost' : rnd + 100
-        }
+        this.Title =  'Title_' + rnd,
+        this.CreationTime = Date.now(),
+        this.ScheduledTime = Date.now(),
+        this.IsComplete = (rnd % 2 == 0) ? true : false,
+        this.Estimate = rnd,
+        this.FinalCost = rnd + 100
+        return this;
     }
 }
 
