@@ -35,15 +35,14 @@ class UserModel {
     _TestModel() {
         let rnd = Math.random() * (1000 - 1) + 1;
 
-        return {
-            'FirstName' : 'FirstName_' + rnd,
-            'LastName' : 'LastName_' + rnd,
-            'BirthDate' : Date.now(),
-            'CreationDate' :  Date.now(),
-            'IsAdmin' : (rnd % 2 == 0) ? true : false,
-            'CurrentRentals' : ['rental1_' + rnd, 'rental2_' + rnd],
-            'TransactionHistory' : ['trans1_' + rnd, 'trans2_' + rnd],
-        }
+        this.fName = 'FirstName_' + rnd;
+        this.lName = 'LastName_' + rnd;
+        this.birthDate = Date.now();
+        this.createDate =  Date.now();
+        this.isAdmin = (rnd % 2 == 0) ? true : false;
+        this.currentRentals = ['rental1_' + rnd, 'rental2_' + rnd];
+        this.transHist = ['trans1_' + rnd, 'trans2_' + rnd];
+        return this;
     }
 }
 module.exports.UserModel = UserModel;

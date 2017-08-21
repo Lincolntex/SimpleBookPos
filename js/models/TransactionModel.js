@@ -30,13 +30,11 @@ class TransactionModel {
     _TestModel() {
         let rnd = Math.random() * (1000 - 1) + 1;
 
-        return {
-            'PurchasedItem(s)' : ['Test ' + rnd, 'Test2 ' + rnd],
-            'RentedItem(s)' :  ['Test ' + rnd, 'Test2 ' + rnd],
-            'CustomerId' : 'ID_' + rnd,
-            'TransactionDate' : Date.now(),
-            'HasRental' : (rnd % 2 == 0) ? true : false
-        }
+        this.PurchasedItems = ['Test ' + rnd, 'Test2 ' + rnd],
+        this.RentedItems ['Test ' + rnd, 'Test2 ' + rnd],
+        this.CustomerId = 'ID_' + rnd,
+        this.TransDate = Date.now(),
+        this.HasRentals = (rnd % 2 == 0) ? true : false
     }
 }
 

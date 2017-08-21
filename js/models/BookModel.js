@@ -29,17 +29,6 @@ class BookModel {
         }
     }
 
-    TestBook(num) {
-        return {
-            'Title' : 'title ' + num,
-            'Author' : this.Author,
-            'Artist' : this.Artist,
-            'Sku10' : this.Sku10,
-            'Sku13' : this.Sku13,
-            'Quantity' : this.Quantity
-        }
-    }
-
     _TestModel() {
         let rnd = Math.random() * (1000 - 1) + 1;
 
@@ -49,7 +38,7 @@ class BookModel {
         this.Sku10 = rnd,
         this.Sku13 = rnd + 100,
         this.Author = rnd + 5
-        return this;
+        return this; 
     }
 }
 
