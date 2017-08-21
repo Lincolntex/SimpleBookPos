@@ -1,9 +1,9 @@
-var BookModel = require('BookModel.js').BookModel;
+var BookModel = require('./BookModel.js').BookModel;
 
 class TransactionModel {
     constructor() {
-        this.PurchasedItems = [Object as UserModel];
-        this.RentedItems = [Object as UserModel];
+        this.PurchasedItems = [Object];
+        this.RentedItems = [Object];
         this.CustomerId = String;
         this.TransDate = Date;
         this.HasRentals = Boolean;
@@ -35,6 +35,7 @@ class TransactionModel {
         this.CustomerId = 'ID_' + rnd,
         this.TransDate = Date.now(),
         this.HasRentals = (rnd % 2 == 0) ? true : false
+        return this;
     }
 }
 

@@ -1,6 +1,6 @@
 var UserModel = require('../models/UserModel.js').UserModel;
 var BookModel = require('../models/BookModel.js').BookModel;
-var AppointmenModel = require('../models/AppointmentModel.js').AppointmentModel;
+var AppointmentModel = require('../models/AppointmentModel.js').AppointmentModel;
 var TransactionModel = require('../models/TransactionModel.js').TransactionModel;
 
 var DatabaseManager = require('../DataBaseManager.js').DataBaseManager;
@@ -18,7 +18,8 @@ class TestingSuite {
 
     // define random one off tests here
     RunRandomTest() {
-
+        // var Appointment = new AppointmentModel()._TestModel();
+        // var Transaction = new TransactionModel()._TestModel();
     }
 }
 
