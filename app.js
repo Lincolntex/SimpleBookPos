@@ -23,4 +23,17 @@ app.get('/', function(req, res) {
 // tell the server to start listening to requests at "localhost:3000/"
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
+  // var dbfile = require('./js/DataBaseManager.js').DataBaseManager;
+  // var db = new dbfile();
+  // var UserModel = require('./js/models/UserModel.js').UserModel;
+  // var User = new UserModel().makeUser('Me', 'Doe', '12', '06', true, [4], [7])
+
+  // db.insertUser(User, function(err, res){
+  //   if(err){
+  //     console.error("[app] error - "+ err)
+  //   }
+  //   else{
+  //     console.log(res);
+  //   }
+  // })
 })
