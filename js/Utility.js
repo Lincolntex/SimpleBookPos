@@ -30,7 +30,7 @@ class Utility {
         var userModelValidator = new UserModel().ToModel();
         var allKeysAreValid = true;
 
-        _.forOwn(obj, function(value, key) {
+        _.forOwn(obj, (value, key) => {
             if (userModelValidator[key] == null) {
                 allKeysAreValid = false;
                 return;
@@ -40,3 +40,5 @@ class Utility {
         return allKeysAreValid;
     }
 }
+
+module.exports.Utlity = Utility;
