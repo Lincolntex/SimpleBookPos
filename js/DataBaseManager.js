@@ -16,6 +16,8 @@ const UsersTableName = "Users";
 const BooksTableName = "Books";
 const AppointmentsTableName = "Appointments";
 const TransactionsTableName = "Transactions";
+var Utility = require("./Utility.js").Utility;
+var util = new Utility()
 
 class DataBaseManager{
     constructor(){
@@ -45,6 +47,122 @@ class DataBaseManager{
             }
         })
     }
+
+    getUser(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][getUser] : could not get user info");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateUserSearchParams(searchPerams)){
+                    db.collection(UsersTableName).findOne(searchPerams, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][getUser] : Query failed");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error("[DB-Manager][getUser] : Invalad search perameters provided");
+                    callback("404",null);
+
+                }
+                
+            }
+        })
+    }
+
+    getUsers(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][getUsers] : Could not get user info");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateUserSearchParams(searchPerams)){
+                    db.collection(UsersTableName).find(searchPerams,function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][getUsers] : Querys failed");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error("[DB-Manager][getUsers] : Invalad search perameters provided")
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    updateUser(searchPerams,updatePerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][updateUser] : Could not connect to DB");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateUserSearchParams(searchPerams) && util.ValidateUserSearchParams(updatePerams)){
+                    var updateParamsFormatted = {$set : updatePerams};
+                    db.collection(UsersTableName).updateOne(searchPerams, updateParamsFormatted, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][UpdateUser] : Could not update user");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res)
+                        }
+                    })
+                }
+                else{
+                    console.error("Invalid search parameters provided");
+                    callback(err,null);
+                } 
+            }
+        })
+    }
+
+    deleteUser(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][getUsers] : Could not get user info");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateUserSearchParams(searchPerams)){
+                    db.collection(UsersTableName).findOneAndDelete(searchPerams,function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][getUsers] : Querys failed");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error("[DB-Manager][getUsers] : Invalad search perameters provided")
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
     insertBook(book,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
@@ -66,6 +184,7 @@ class DataBaseManager{
             }
         })
     }
+
     insertAppointment(appointment,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
@@ -87,6 +206,7 @@ class DataBaseManager{
             }
         })
     }
+
     insertTransaction(transaction, callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
