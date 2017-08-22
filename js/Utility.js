@@ -8,6 +8,9 @@
  * will be defined here. This was we can keep functions that are used 
  * throughout our entire application in one area.
 */
+var UserModel = require('./models/UserModel.js').UserModel;
+var _ = require('lodash');
+
 class Utility {
     constructor() {
 
@@ -21,5 +24,19 @@ class Utility {
         }
 
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    }
+
+    ValidateUserSearchParams() {
+        var userModelValidator = new UserModel().ToModel();
+        var allKeysAreValid = true;
+
+        _.forOwn(obj, function(value, key) {
+            if (userModelValidator[key] == null) {
+                allKeysAreValid = false;
+                return;
+            }
+        });
+
+        return allKeysAreValid;
     }
 }
