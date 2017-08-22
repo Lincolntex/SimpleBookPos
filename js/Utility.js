@@ -9,6 +9,10 @@
  * throughout our entire application in one area.
 */
 var UserModel = require('./models/UserModel.js').UserModel;
+var BookModel = require('./models/BookModel.js').BookModel;
+var AppointmentModel = require('./models/AppointmentModel.js').AppointmentModel;
+var TransactionModel = require('./models/TransactionModel.js').TransactionModel;
+
 var _ = require('lodash');
 
 class Utility {
@@ -26,12 +30,62 @@ class Utility {
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 
-    ValidateUserSearchParams() {
-        var userModelValidator = new UserModel().ToModel();
+    // validates user query object being
+    // passed into a db search function contains valid keys
+    ValidateUserSearchParams(obj) {
+        var validationModel = new UserModel().ToModel();
         var allKeysAreValid = true;
 
         _.forOwn(obj, (value, key) => {
-            if (userModelValidator[key] == null) {
+            if (validationModel[key] == null) {
+                allKeysAreValid = false;
+                return;
+            }
+        });
+
+        return allKeysAreValid;
+    }
+
+    // validates book query object being
+    // passed into a db search function contains valid keys
+    ValidateBookSearchParams(obj) {
+        var validationModel = new BookModel().ToModel();
+        var allKeysAreValid = true;
+
+        _.forOwn(obj, (value, key) => {
+            if (validationModel[key] == null) {
+                allKeysAreValid = false;
+                return;
+            }
+        });
+
+        return allKeysAreValid;
+    }
+
+    // validates transaction query object being
+    // passed into a db search function contains valid keys
+    ValidateTransactionSearchParams(obj) {
+        var validationModel = new TransactionModel().ToModel();
+        var allKeysAreValid = true;
+
+        _.forOwn(obj, (value, key) => {
+            if (validationModel[key] == null) {
+                allKeysAreValid = false;
+                return;
+            }
+        });
+
+        return allKeysAreValid;
+    }
+
+    // validates appt. query object being
+    // passed into a db search function contains valid keys
+    ValidateAppointmentSearchParams(obj) {
+        var validationModel = new AppointmentModel().ToModel();
+        var allKeysAreValid = true;
+
+        _.forOwn(obj, (value, key) => {
+            if (validationModel[key] == null) {
                 allKeysAreValid = false;
                 return;
             }
