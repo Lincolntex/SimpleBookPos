@@ -41,4 +41,4 @@ class Utility {
     }
 }
 
-module.exports.Utlity = Utility;
+module.exports.Utility = Utility;
