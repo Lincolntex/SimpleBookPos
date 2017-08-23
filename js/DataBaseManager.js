@@ -69,7 +69,7 @@ class DataBaseManager{
                     })
                 }
                 else{
-                    console.error("[DB-Manager][getUser] : Invalad search perameters provided");
+                    console.error("[DB-Manager][getUser] : Invalid search parameters provided");
                     callback("404",null);
 
                 }
@@ -99,7 +99,7 @@ class DataBaseManager{
                     })
                 }
                 else{
-                    console.error("[DB-Manager][getUsers] : Invalad search perameters provided")
+                    console.error("[DB-Manager][getUsers] : Invalid search parameters provided")
                     callback("404",null);
                 }
             }
@@ -129,7 +129,7 @@ class DataBaseManager{
                 }
                 else{
                     console.error("Invalid search parameters provided");
-                    callback(err,null);
+                    callback('404',null);
                 } 
             }
         })
@@ -156,7 +156,7 @@ class DataBaseManager{
                     })
                 }
                 else{
-                    console.error("[DB-Manager][getUsers] : Invalad search perameters provided")
+                    console.error("[DB-Manager][getUsers] : Invalid search parameters provided")
                     callback("404",null);
                 }
             }
@@ -185,6 +185,120 @@ class DataBaseManager{
         })
     }
 
+    getBook(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][getBook] : could not connect to the DB");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateBookSearchParams(searchPerams)){
+                    db.collection(BooksTableName).findOne(searchPerams,function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][getBook] : Query failed");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error("[DB-Manager][getBook] : Invalid search parameters provided");
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    getBooks(book,callback){
+        this.MongoClient.connect(this.url,function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][getBooks] : could not connect to the DB");
+                callback(err,null);
+            }
+            else{
+                if(ValidateBookSearchParams(searchPerams)){
+                    db.collection(BooksTableName).find(searchPerams,function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][getBooks] : Query failed");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error("[DB-Manager][getBooks] : Invalid search parameters provided");
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    updateBook(searchPerams,updatePerams,callback){
+        this.MongoClient.connect(this.url,function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][updateBook] : Could not connect to DB");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateBookSearchParams(searchPerams) && util.ValidateBookSearchParams(updatePerams)){
+                    var updateParamsFormatted = {$set : updatePerams};
+                    db.collection(BooksTableName).updateOne(searchPerams,updateParamsFormatted,function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][updateBook] : Could not update book");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error("[DB-Manager][updateBook] : Invalid search parameters provided");
+                    callback('404',null);
+                }
+            }
+        })
+    }
+
+    deleteBook(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error("[DB-Manager][deleteBook] : could not connect to DB");
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateBookSearchParams(searchPerams)){
+                    db.collection(BooksTableName).findOneAndDelete(searchPerams,function(err,res){
+                        db.close();
+                        if(err){
+                            console.error("[DB-Manager][deleteBook] : Querys failed");
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+    
+                }
+                else{
+                    console.error("[DB-Manager][deleteBook] : Invalid search parameters provided");
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
     insertAppointment(appointment,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
@@ -203,6 +317,119 @@ class DataBaseManager{
                         callback(err,null);
                     }
                 })
+            }
+        })
+    }
+
+    getAppointment(searchPerams, callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error('[DB-Manager][getAppointment] : Could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateAppointmentSearchParams(searchPerams)){
+                    db.collection(AppointmentsTableName).findOne(searchPerams, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error('[DB-Manager][getAppointment] : could not retrieve Appointment');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    });
+                }
+                else{
+                    console.error('[DB-Manager][getAppointment] : Invalid search parameter provided');
+                    callback(err,null);
+                }
+            }
+        });
+    }
+
+    getAppointments(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error('[DB-Manager][getAppointments] : could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateAppointmentSearchParams(searchPerams)){
+                    db.collection(AppointmentsTableName).find(searchPerams, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error('[DB-Manager][getAppointments] : could not retrieve Appointments');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error('[DB-Manager][getAppointments] : Invalid search parameter provided');
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    updateAppointments(searchPerams,updatePerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error('[DB-Manager][updateAppointment] : could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateAppointmentSearchParams(searchPerams) && util.ValidateAppointmentSearchParams(updatePerams)){
+                    var updateParamsFormatted = {$set : updatePerams};
+                    db.collection(AppointmentsTableName).updateOne(searchPerams,updateParamsFormatted, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error('[DB-Manager][updateAppointment] : could not update Appointment');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    });
+                }
+                else{
+                    console.error('[DB-Manager][updateAppointment] : Invalid search parameters provided');
+                    callback("404",null);
+                }
+            }
+        });
+    }
+
+    deleteAppointment(searchPerams,callback){
+        this.MongoClient.connect(this.url,function(err,db){
+            if(err){
+                db.close();
+                console.error('[DB-Manager][deleteAppointment] : could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateAppointmentSearchParams(searchPerams)){
+                    db.collection(AppointmentsTableName).findOneAndDelete(searchPerams, function(err,res){
+                        db.close()
+                        if(err){
+                            console.error('[DB-Manager][deleteAppointment] : could not remove appointment');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error('[DB-Manager][deleteAppointment] : Invalid search parameters provided');
+                    callback("404",null);
+                }
             }
         })
     }
@@ -227,6 +454,118 @@ class DataBaseManager{
             }
         })
     }
+    getTransaction(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close()
+                console.error('[DB-Manager][getTransaction] : could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateTransactionSearchParams(searchPerams)){
+                    db.collection(TransactionsTableName).findOne(searchPerams, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error('[DB-Manager][getTransaction] : could not find transaction');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error('[DB-Manager][getTransaction] : Invalid search parameters provided');
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    getTransactions(searchPerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close()
+                console.error('[DB-Manager][getTransaction] : could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateTransactionSearchParams(searchPerams)){
+                    db.collection(TransactionsTableName).find(searchPerams, function(err,res){
+                        db.close();
+                        if(err){
+                            console.error('[DB-Manager][getTransaction] : could not find transaction');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error('[DB-Manager][getTransaction] : Invalid search parameters provided');
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    updateTransaction(searchPerams,updatePerams,callback){
+        this.MongoClient.connect(this.url, function(err,db){
+            if(err){
+                db.close();
+                console.error('[DB-Manager][updateTransaction] : Could not connect to the DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateTransactionSearchParams(searchPerams) && util.ValidateTransactionSearchParams(updatePerams)){
+                    var updateParamsFormatted = {$set : updatePerams};
+                    db.collection(TransactionsTableName).updateOne(searchPerams,updateParamsFormatted, function(err,res){
+                        if(err){
+                            console.error('[DB-Manager][updateTransaction] : Could not update the Transaction');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error('[DB-Manager][updateTransaction] : Invalid search parameters provided');
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
+    deleteTransatction(searchPerams,callback){
+        this.MongoClient.connect(this.url,function(err,db){
+            if(err){
+                db.close();
+                console.error('[DB-Manager][deleteTransaction] : could not connect to DB');
+                callback(err,null);
+            }
+            else{
+                if(util.ValidateTransactionSearchParams(searchPerams)){
+                    db.collection(TransactionsTableName).findOneAndDelete(searchPerams, function(err,res){
+                        db.close()
+                        if(err){
+                            console.error('[DB-Manager][deleteTransaction] : could not remove trasaction');
+                            callback(err,null);
+                        }
+                        else{
+                            callback(null,res);
+                        }
+                    })
+                }
+                else{
+                    console.error('[DB-Manager][deleteAppointment] : Invalid search parameters provided');
+                    callback("404",null);
+                }
+            }
+        })
+    }
+
 }
 
 
