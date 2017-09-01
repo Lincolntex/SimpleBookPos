@@ -19,14 +19,17 @@ var TestSuite = new TestSuiteManager();
 app.use("/styles", express.static(__dirname + '/styles')); // where we create our own custom css
 app.use("/assets", express.static(__dirname + '/assets')); // where we store our image assets
 app.use("/lib", express.static(__dirname + '/lib')); // where the bootstrap css and js are located
+app.use("/js", express.static(__dirname + '/js'));
+app.use("/views", express.static(__dirname + '/views'));
 
-// define the main endpoint "localhost:port/"
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/views/dashboard.html'));
-});
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/login', function(req,res) {
+  res.sendFile(path.join(__dirname, '/public/views/register.html'))
+})
 
 // tell the server to start listening to requests at "localhost:3000/"
-app.listen(3000, function () {
+app.listen(8080, function () {
   console.log('Example app listening on port 3000!')
   TestSuite.RunTestSuite()
   TestSuite.RunRandomTest();

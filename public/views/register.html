@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sign In/Up</title>
+        <!-- Bootstrap core CSS -->
+        <link href="../lib/bootstrap4/css/bootstrap.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="./../viewControllers/register.js"></script>
+    </head>
+    <body>
+         <div class="container">
+            <h1>Sign Up</h1>
+            <form id='sign-up-form' onsubmit="CreateUser">
+                <p>Enter your first name</p>
+                <input id = "fName" type="text" placeholder="John"></input>
+                <p>Enter your last name</p>
+                <input id = "lName" type="text" placeholder="Doe"></input>
+                <p>Enter a username</p>
+                <input id = "uName" type="text"></input>
+                <p>Enter a password</p>
+                <input id = "pw" type="text"></input>
+                <p>Enter your date of birth</p>
+                <input id = "dob" type="date"></input>
+                <p>Enter your email</p>
+                <input id = "email" type="email"></input>
+                <p>Enter your phone number</p>
+                <input id = "pn" type="tel"></input>
+
+                <br>
+
+                <button type="submit" style="margin-top:10px">Create Account</button>
+                <hr>              
+            </form>
+
+            <form id="sign-in-form" onsubmit="LoginUser">
+                <h1>Sign In</h1>
+                <p>Enter username</p>
+                <input type="text"></input>
+                <p>Enter password</p>
+                <input type="text"></input>
+
+                <br>
+
+                <button type="submit" style="margin-top:10px">Sign In</button>  
+            </form>
+         </div>
+    </body>
+</html>
