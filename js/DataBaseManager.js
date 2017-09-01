@@ -71,9 +71,7 @@ class DataBaseManager{
                 else{
                     console.error("[DB-Manager][getUser] : Invalid search parameters provided");
                     callback("404",null);
-
                 }
-                
             }
         })
     }

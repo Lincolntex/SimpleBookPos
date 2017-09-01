@@ -14,6 +14,7 @@ var db = new DatabaseManager();
 var TestSuiteManager = require('./js/tests/TestingSuite.js').TestingSuite;
 var TestSuite = new TestSuiteManager();
 
+var ENV_PORT = 8080;
 
 // tell the server which files we want to serve and where they are located
 app.use("/styles", express.static(__dirname + '/styles')); // where we create our own custom css
@@ -28,9 +29,20 @@ app.get('/login', function(req,res) {
   res.sendFile(path.join(__dirname, '/public/views/register.html'))
 })
 
+// define API endpoints
+app.get('/api/users/:username', function(req, res) {
+    db.getUser({'Username' : req.params.username}, function(err, user) {
+      if (err) {
+        return res.send(500, {'error' : err });
+      } else {
+        return res.send(200, {'user' : user})
+      }
+    });
+});
+
 // tell the server to start listening to requests at "localhost:3000/"
-app.listen(8080, function () {
-  console.log('Example app listening on port 3000!')
-  TestSuite.RunTestSuite()
-  TestSuite.RunRandomTest();
+app.listen(ENV_PORT, function () {
+  console.log('Example app listening on port ' + ENV_PORT)
+  // TestSuite.RunTestSuite();
+  // TestSuite.RunRandomTest();
 })

@@ -1,20 +1,28 @@
 class UserModel {
     constructor(){
-        this.fName = ''
+        this.fName = '';
         this.lName = '';
+        this.uName = '';
+        this.password = '';
         this.birthDate = '';
+        this.email = '';
+        this.phoneNumber = '';
         this.createDate = '';
         this.isAdmin = '';
         this.currentRentals = [];
         this.transHist = [];
     }
 
-    CreateUser(fName, lName, birthDate, createDate, isAdmin, currentRentals, transHist){
+    CreateUser(fName, lName, uName, password, birthDate, email, phoneNumber, currentRentals, transHist){
         this.fName = fName;
         this.lName = lName;
+        this.uName = uName;
+        this.password = password;
         this.birthDate = birthDate;
-        this.createDate = createDate;
-        this.isAdmin = isAdmin;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.createDate = Date.now();
+        this.isAdmin = false;
         this.currentRentals = currentRentals;
         this.transHist = transHist;
         return this;
