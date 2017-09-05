@@ -4,44 +4,103 @@
         <title>Sign In/Up</title>
         <!-- Bootstrap core CSS -->
         <link href="../lib/bootstrap4/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="./../styles/register.css" rel="stylesheet"/>
+        
         <script type="text/javascript" src="./../viewControllers/register.js"></script>
     </head>
     <body>
-         <div class="container">
-            <h1>Sign Up</h1>
-            <form id='sign-up-form' onsubmit="CreateUser">
-                <p>Enter your first name</p>
-                <input id = "fName" type="text" placeholder="John"></input>
-                <p>Enter your last name</p>
-                <input id = "lName" type="text" placeholder="Doe"></input>
-                <p>Enter a username</p>
-                <input id = "uName" type="text"></input>
-                <p>Enter a password</p>
-                <input id = "pw" type="text"></input>
-                <p>Enter your date of birth</p>
-                <input id = "dob" type="date"></input>
-                <p>Enter your email</p>
-                <input id = "email" type="email"></input>
-                <p>Enter your phone number</p>
-                <input id = "pn" type="tel"></input>
+        <!-- TOP NAVBAR -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Dashboard</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Database Manager<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">IT Tickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Contact Us</button>
+                </form>
+            </div>
+        </nav>
 
-                <br>
+         <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h3 class="heading">Sign in or create an account to be able to track your purchases, active rentals, recieve newsletters and communicate with us directly!</h3>            
+                </div>                
+                <div class="col-md-2"></div>
+            </div>
+             <div class="h-100 row form-area">
+                <div class="col-md-2"></div>
 
-                <button type="submit" style="margin-top:10px">Create Account</button>
-                <hr>              
-            </form>
-
-            <form id="sign-in-form" onsubmit="LoginUser">
-                <h1>Sign In</h1>
-                <p>Enter username</p>
-                <input type="text"></input>
-                <p>Enter password</p>
-                <input type="text"></input>
-
-                <br>
-
-                <button type="submit" style="margin-top:10px">Sign In</button>  
-            </form>
+                <div class="col-md-4 card card-outline-up sign-up-block">
+                    <h1 class="form-heading">Sign Up</h1>
+                    <form id='sign-up-form' onsubmit="CreateUser">
+                        <div class="form-group">
+                            <input id="fName" class="form-control" type="text" placeholder="First Name"></input>
+                        </div>
+                        <div class="form-group">
+                            <input id="lName" class="form-control" type="text" placeholder="Last Name"></input>
+                        </div>
+                        <div class="form-group">
+                            <input id="uName" class="form-control" type="text" placeholder="Username"></input>
+                        </div>
+                        <div class="form-group">
+                            <input id="pw" class="form-control" type="password" placeholder="Password"></input>
+                        </div>
+                        <div class="form-group">
+                            <input id="dob" class="form-control" type="date"></input>
+                        </div>
+                        <div class="form-group">
+                            <input id="email" class="form-control" type="email" placeholder="Email"></input>
+                        </div>
+                        <div class="form-group">
+                            <input id="pn" class="form-control" type="tel" placeholder="Phone Number"></input>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control sign-up-btn">Create Account</button>
+                        </div>        
+                    </form>
+                </div>
+                <div class="col-md-4 card card-outline-in sign-in-block">
+                    <form id="sign-in-form" onsubmit="LoginUser">
+                            <h1 class="form-heading">Sign In</h1>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Username or Email"></input>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password"></input>
+                            </div>
+            
+                            <div class="form-group">
+                                <button type="submit" class="form-control sign-in-btn">Sign In</button>  
+                            </div>
+                    </form>    
+                </div>   
+                
+                <div class="col-md-2"></div>                
+            </div>
          </div>
+
+         <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Placerville Comics and Computers &copy; 2017</span>
+            </div>
+        </footer>
     </body>
 </html>

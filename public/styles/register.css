@@ -1,0 +1,75 @@
+.row {
+    margin-top: 2%;
+}
+.sign-up-btn {
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+
+.sign-in-block {
+    margin-left: 2px;
+}
+
+.sign-up-block {
+    margin-right: 2px;
+}
+
+.card-outline-in {
+    border-color: #593959
+}
+
+.card-outline-up {
+    border-color:#46ACC2;
+}
+
+.sign-up-btn:hover {
+    color: white;
+    background: #46ACC2;
+}
+
+#sign-in-form .form-control:focus {
+    border-color: #593959;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #593959;
+    outline: 0 none;
+}
+
+#sign-up-form .form-control:focus {
+    border-color: #2e5eaa;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #2e5eaa;;
+    outline: 0 none;
+}
+
+.sign-in-btn {
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+
+.sign-in-btn:hover {
+    color: white;
+    background: #5B4E77;
+}
+
+.heading {
+    text-align: center;
+}
+
+.form-heading {
+    text-align: center;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+  }
