@@ -13,7 +13,7 @@ class UserModel {
         this.transHist = [];
     }
 
-    CreateUser(fName, lName, uName, password, birthDate, email, phoneNumber, currentRentals, transHist){
+    CreateUser(fName, lName, uName, password, birthDate, email, phoneNumber, currentRentals, transHist, isAdmin = false){
         this.fName = fName;
         this.lName = lName;
         this.uName = uName;
@@ -22,16 +22,20 @@ class UserModel {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.createDate = Date.now();
-        this.isAdmin = false;
+        this.isAdmin = isAdmin;
         this.currentRentals = currentRentals;
         this.transHist = transHist;
         return this;
 
     }
-    ToModel(){
-        return{
+    ToModel() {
+        return {
             'FirstName' : this.fName,
             'LastName' : this.lName,
+            'Username' : this.uName,
+            'Password' : this.password,
+            'Email' : this.email,
+            'PhoneNumber' : this.phoneNumber,
             'BirthDate' : this.birthDate,
             'CreationDate' : this.createDate,
             'IsAdmin' : this.isAdmin,

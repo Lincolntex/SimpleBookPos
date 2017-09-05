@@ -8,7 +8,11 @@
 // import libraries
 const express = require('express')
 const app = express()
+var _ = require('lodash');
 var path = require('path');
+var bodyParser = require('body-parser');
+
+var UserModel = require('./js/models/UserModel.js').UserModel;
 var DatabaseManager = require('./js/DatabaseManager.js').DataBaseManager;
 var db = new DatabaseManager();
 var TestSuiteManager = require('./js/tests/TestingSuite.js').TestingSuite;
@@ -22,6 +26,7 @@ app.use("/assets", express.static(__dirname + '/assets')); // where we store our
 app.use("/lib", express.static(__dirname + '/lib')); // where the bootstrap css and js are located
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/views", express.static(__dirname + '/views'));
+app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,13 +36,53 @@ app.get('/login', function(req,res) {
 
 // define API endpoints
 app.get('/api/users/:username', function(req, res) {
-    db.getUser({'Username' : req.params.username}, function(err, user) {
+    db.getUser({'Username' : req.params['username']}, function(err, user) {
       if (err) {
         return res.send(500, {'error' : err });
       } else {
         return res.send(200, {'user' : user})
       }
     });
+});
+
+// expects user model in form of JSON in request body
+app.post('/api/users/', function(req, res) {
+    var user = new UserModel().CreateUser(
+        req.body['user']['FirstName'],
+        req.body['user']['LastName'],
+        req.body['user']['Username'],
+        req.body['user']['Password'],
+        req.body['user']['Birthdate'],
+        req.body['user']['Email'],
+        req.body['user']['PhoneNumber'],
+        req.body['user']['CurrentRentals'],
+        req.body['user']['TransactionHistory'],
+        req.body['user']['IsAdmin']
+    );
+
+    db.insertUser(user, function(err, db_res) {
+      if (err) {
+        return res.status(500).send(err);
+      } else {
+        return res.status(200).send(db_res);
+      }
+    });
+});
+
+app.delete('/api/users/:username', function(req, res) {
+    db.deleteUser({'Username' : req.params['username']}, function(err, res) {
+      if (err) {
+        res.send(500, {'error' : err});
+      } else {
+        res.send(200, {'user' : res});
+      }
+    });
+});
+
+// update params will be included in the body of the response object
+app.put('/api/users/:username', function(req, res) {
+      let updateParams = req.body['updateParams'];
+
 });
 
 // tell the server to start listening to requests at "localhost:3000/"
