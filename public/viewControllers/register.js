@@ -1,7 +1,3 @@
-var userModel = require("./../../js/models/UserModel.js").UserModel;
-var DBManager = require("./../../js/DataBaseManager.js").DataBaseManager;
-var db = new DBManager();
-
 function CreateUser(){
     var fName = document.getElementById("fName").value;
     var lName = document.getElementById("lName").value;
