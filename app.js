@@ -95,6 +95,26 @@ app.put('/api/users/:username', function(req, res) {
   // TODO
 });
 
+//login
+app.post('/api/login', function(req, res) {
+  console.info('hit /api/login method: POST');
+
+  db.getUser(
+    {
+      'Username' : req.body['credentials']['Username'],
+      'Pasword' : req.body['credentials']['Password']
+    }, 
+    function(err, db_res) {
+      if (err) {
+        return res.status(500).send({'error' : err})
+      } else if (db_res === null) {
+        return res.status(403).send({'error' : "Invalid credentials"});
+      } else {
+        return res.status(200).send({'error' : null});
+      }
+    })
+});
+
 // tell the server to start listening to requests at "localhost:3000/"
 app.listen(ENV_PORT, function () {
   console.log('Example app listening on port ' + ENV_PORT)
