@@ -36,6 +36,8 @@ app.get('/login', function(req,res) {
 
 // define API endpoints
 app.get('/api/users/:username', function(req, res) {
+    console.info('hit /api/users/:username method: GET');  
+  
     db.getUser({'Username' : req.params['username']}, function(err, user) {
       if (err) {
         console.log(err);
@@ -49,6 +51,8 @@ app.get('/api/users/:username', function(req, res) {
 
 // expects user model in form of JSON in request body
 app.post('/api/users', function(req, res) {
+    console.info('hit /api/users method: POST');
+
     var user = new UserModel().CreateUser(
         req.body['user']['FirstName'],
         req.body['user']['LastName'],
@@ -72,6 +76,8 @@ app.post('/api/users', function(req, res) {
 });
 
 app.delete('/api/users/:username', function(req, res) {
+    console.info('hit /api/users/:username method: DELETE');
+  
     db.deleteUser({'Username' : req.params['username']}, function(err, db_res) {
       if (err) {
         return res.status(500).send({'error' : err });
@@ -83,6 +89,8 @@ app.delete('/api/users/:username', function(req, res) {
 
 // update params will be included in the body of the response object
 app.put('/api/users/:username', function(req, res) {
+      console.info('hit /api/users/:username method: UPDATE');
+    
       let updateParams = req.body['updateParams'];
   // TODO
 });
