@@ -1,123 +1,138 @@
-/*
- * Since we are using Node.js in our app to serve up the
- * pages when they are requested, this is where we define 
- * the main server side logic. What folders and files to serve up 
- * and the main entrypoint of the application - "dashboard.html"
-*/
+// Node.js app setup
 
-// import libraries
+/*
+ * Import Needed NPM libraries
+*/
 const express = require('express')
 const app = express()
-var _ = require('lodash');
-var path = require('path');
-var bodyParser = require('body-parser');
+let _ = require('lodash');
+let path = require('path');
+let bodyParser = require('body-parser');
 
-var UserModel = require('./js/models/UserModel.js').UserModel;
-var DatabaseManager = require('./js/DatabaseManager.js').DataBaseManager;
-var db = new DatabaseManager();
-var TestSuiteManager = require('./js/tests/TestingSuite.js').TestingSuite;
-var TestSuite = new TestSuiteManager();
+/*
+ * Import our own needed files
+*/
+let UserModel = require('./js/models/UserModel.js').UserModel;
 
-var ENV_PORT = 8080;
+let DatabaseManager = require('./js/DatabaseManager.js').DataBaseManager;
+let db = new DatabaseManager();
 
-// tell the server which files we want to serve and where they are located
-app.use("/styles", express.static(__dirname + '/styles')); // where we create our own custom css
-app.use("/assets", express.static(__dirname + '/assets')); // where we store our image assets
-app.use("/lib", express.static(__dirname + '/lib')); // where the bootstrap css and js are located
+let TestSuiteManager = require('./js/tests/TestingSuite.js').TestingSuite;
+let TestSuite = new TestSuiteManager();
+
+/*
+ * Specify all the folders that the server should serve to the client
+ */
+app.use("/styles", express.static(__dirname + '/styles'));
+app.use("/assets", express.static(__dirname + '/assets'));
+app.use("/lib", express.static(__dirname + '/lib'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/views", express.static(__dirname + '/views'));
-app.use(bodyParser.json())
 
+/*
+ * Specify the middleware that the server will user
+*/
+app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/login', function(req,res) {
-  res.sendFile(path.join(__dirname, '/public/views/register.html'))
-})
+/*
+ * Define routes and their corresponding pages that will represent them
+*/
+app.get('/login', (req,res) => {
+  res.sendFile(path.join(__dirname, '/public/views/signIn.html'));
+});
 
-// define API endpoints
-app.get('/api/users/:username', function(req, res) {
-    console.info('hit /api/users/:username method: GET');  
-  
-    db.getUser({'Username' : req.params['username']}, function(err, user) {
+app.get('/admin', (req,res) => {
+  res.sendFile(path.join(__dirname, '/public/views/admin.html'));
+});
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/views/profile.html'));
+});
+
+/*
+ * API endpoints for communication from client to server
+*/
+app.get('/api/users/:username', (req, res) => {
+    console.info('GET /api/users/:username');
+
+    db.getUser({'Username' : req.params['username']}, (err, user) => {
       if (err) {
         console.log(err);
-        return res.status(500).send({'error' : err });
+        return res.status(500).send({'message' : err });
       } else {
         console.log(user)
-        return res.status(200).send({'user' : user})
+        return res.status(200).send({'message' : user});
       }
     });
 });
 
-// expects user model in form of JSON in request body
-app.post('/api/users', function(req, res) {
-    console.info('hit /api/users method: POST');
+app.post('/api/users', (req, res) => {
+    console.info('POST /api/users');
+    let user = new UserModel().BuildUserFromApiReq(req);
 
-    var user = new UserModel().CreateUser(
-        req.body['user']['FirstName'],
-        req.body['user']['LastName'],
-        req.body['user']['Username'],
-        req.body['user']['Password'],
-        req.body['user']['Birthdate'],
-        req.body['user']['Email'],
-        req.body['user']['PhoneNumber'],
-        req.body['user']['CurrentRentals'],
-        req.body['user']['TransactionHistory'],
-        req.body['user']['IsAdmin']
-    );
-
-    db.insertUser(user, function(err, db_res) {
+    db.insertUser(user, (err, db_res) => {
       if (err) {
-        return res.status(500).send(err);
+        return res.status(500).send({'messagee' : err});
       } else {
-        return res.status(200).send(db_res);
+        return res.status(200).send({'message' : db_res});
       }
     });
 });
 
-app.delete('/api/users/:username', function(req, res) {
-    console.info('hit /api/users/:username method: DELETE');
-  
-    db.deleteUser({'Username' : req.params['username']}, function(err, db_res) {
+app.delete('/api/users/:username', (req, res) => {
+    console.info('DELETE /api/users/:username');
+
+    db.deleteUser({'Username' : req.params['username']}, (err, db_res) => {
       if (err) {
-        return res.status(500).send({'error' : err });
+        return res.status(500).send({'message' : err });
       } else {
-        return res.status(200).send({'user' : db_res})
+        return res.status(200).send({'message' : db_res})
       }
     });
 });
 
-// update params will be included in the body of the response object
-app.put('/api/users/:username', function(req, res) {
-      console.info('hit /api/users/:username method: UPDATE');
-    
+app.put('/api/users/:username', (req, res) => {
+      console.info('UPDATE /api/users/:username');
       let updateParams = req.body['updateParams'];
-  // TODO
+
+      db.updateUser(searchParams, {'Username' : req.params['username']}, (err, db_res) => {
+        if (err) {
+          return res.status(500).send({'message' : err})
+        } else if (db_res === null) {
+          return res.status(200).send({'message' : "No user found to update"});
+        } else {
+          return res.status(200).send({'message' : null});
+        }
+      });
 });
 
-//login
-app.post('/api/login', function(req, res) {
-  console.info('hit /api/login method: POST');
+app.post('/api/login', (req, res) => {
+  console.info('POST /api/login method');
 
-  db.getUser(
-    {
-      'Username' : req.body['credentials']['Username'],
-      'Pasword' : req.body['credentials']['Password']
-    }, 
-    function(err, db_res) {
+  let searchParams = {
+    'Username' : req.body['credentials']['Username'],
+    'Password' : req.body['credentials']['Password']
+  };
+
+  db.getUser(searchParams, (err, db_res) => {
       if (err) {
-        return res.status(500).send({'error' : err})
+        return res.status(500).send({'message' : err});
       } else if (db_res === null) {
-        return res.status(403).send({'error' : "Invalid credentials"});
+        return res.status(403).send({'message' : "Invalid credentials"});
       } else {
-        return res.status(200).send({'error' : null});
+        return res.status(200).send({'message' : null});
       }
     })
 });
 
-// tell the server to start listening to requests at "localhost:3000/"
-app.listen(ENV_PORT, function () {
-  console.log('Example app listening on port ' + ENV_PORT)
+/*
+ * Launch the server on the specified port
+*/
+app.listen(process.env.port, () => {
+  console.log(`POS app listening on port ${process.env.port}`);
+
+  // Uncomment the following lines to run the test suites
   // TestSuite.RunTestSuite();
   // TestSuite.RunRandomTest();
-})
+});

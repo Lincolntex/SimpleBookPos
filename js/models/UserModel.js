@@ -46,7 +46,7 @@ class UserModel {
     }
 
     _TestModel() {
-        let rnd = Math.random() * (1000 - 1) + 1;
+        let rnd = Math.random() * (10 - 1) + 1;
 
         this.fName = 'FirstName_' + rnd;
         this.lName = 'LastName_' + rnd;
@@ -55,6 +55,20 @@ class UserModel {
         this.isAdmin = (rnd % 2 == 0) ? true : false;
         this.currentRentals = ['rental1_' + rnd, 'rental2_' + rnd];
         this.transHist = ['trans1_' + rnd, 'trans2_' + rnd];
+        return this;
+    }
+
+    BuildUserFromApiReq(req) {
+        this.fName = req.body['user']['FirstName'];
+        this.lName = req.body['user']['LastName'];
+        this.uName = req.body['user']['Username'];
+        this.password = req.body['user']['Password'];
+        this.birthDate = req.body['user']['Birthdate'];
+        this.email = req.body['user']['Email'];
+        this.phoneNumber = req.body['user']['PhoneNumber'];
+        this.currentRentals = req.body['user']['CurrentRentals'];
+        this.transHist = req.body['user']['TransactionHistory'];
+        this.isAdmin = req.body['user']['IsAdmin'];
         return this;
     }
 }

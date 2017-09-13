@@ -48,7 +48,7 @@ class DataBaseManager{
         })
     }
 
-    getUser(searchPerams,callback){
+    getUser(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -56,8 +56,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateUserSearchParams(searchPerams)){
-                    db.collection(UsersTableName).findOne(searchPerams, function(err,res){
+                if(util.ValidateUserSearchParams(searchParams)){
+                    db.collection(UsersTableName).findOne(searchParams, function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][getUser] : Query failed");
@@ -76,7 +76,7 @@ class DataBaseManager{
         })
     }
 
-    getUsers(searchPerams,callback){
+    getUsers(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -84,8 +84,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateUserSearchParams(searchPerams)){
-                    db.collection(UsersTableName).find(searchPerams,function(err,res){
+                if(util.ValidateUserSearchParams(searchParams)){
+                    db.collection(UsersTableName).find(searchParams,function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][getUsers] : Querys failed");
@@ -104,7 +104,7 @@ class DataBaseManager{
         })
     }
 
-    updateUser(searchPerams,updatePerams,callback){
+    updateUser(searchParams,updateParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -112,9 +112,9 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateUserSearchParams(searchPerams) && util.ValidateUserSearchParams(updatePerams)){
-                    var updateParamsFormatted = {$set : updatePerams};
-                    db.collection(UsersTableName).updateOne(searchPerams, updateParamsFormatted, function(err,res){
+                if(util.ValidateUserSearchParams(searchParams) && util.ValidateUserSearchParams(updateParams)){
+                    var updateParamsFormatted = {$set : updateParams};
+                    db.collection(UsersTableName).updateOne(searchParams, updateParamsFormatted, function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][UpdateUser] : Could not update user");
@@ -133,7 +133,7 @@ class DataBaseManager{
         })
     }
 
-    deleteUser(searchPerams,callback){
+    deleteUser(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -141,8 +141,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateUserSearchParams(searchPerams)){
-                    db.collection(UsersTableName).findOneAndDelete(searchPerams,function(err,res){
+                if(util.ValidateUserSearchParams(searchParams)){
+                    db.collection(UsersTableName).findOneAndDelete(searchParams,function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][getUsers] : Querys failed");
@@ -183,7 +183,7 @@ class DataBaseManager{
         })
     }
 
-    getBook(searchPerams,callback){
+    getBook(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -191,8 +191,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateBookSearchParams(searchPerams)){
-                    db.collection(BooksTableName).findOne(searchPerams,function(err,res){
+                if(util.ValidateBookSearchParams(searchParams)){
+                    db.collection(BooksTableName).findOne(searchParams,function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][getBook] : Query failed");
@@ -219,8 +219,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(ValidateBookSearchParams(searchPerams)){
-                    db.collection(BooksTableName).find(searchPerams,function(err,res){
+                if(ValidateBookSearchParams(searchParams)){
+                    db.collection(BooksTableName).find(searchParams,function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][getBooks] : Query failed");
@@ -239,7 +239,7 @@ class DataBaseManager{
         })
     }
 
-    updateBook(searchPerams,updatePerams,callback){
+    updateBook(searchParams,updateParams,callback){
         this.MongoClient.connect(this.url,function(err,db){
             if(err){
                 db.close();
@@ -247,9 +247,9 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateBookSearchParams(searchPerams) && util.ValidateBookSearchParams(updatePerams)){
-                    var updateParamsFormatted = {$set : updatePerams};
-                    db.collection(BooksTableName).updateOne(searchPerams,updateParamsFormatted,function(err,res){
+                if(util.ValidateBookSearchParams(searchParams) && util.ValidateBookSearchParams(updateParams)){
+                    var updateParamsFormatted = {$set : updateParams};
+                    db.collection(BooksTableName).updateOne(searchParams,updateParamsFormatted,function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][updateBook] : Could not update book");
@@ -268,7 +268,7 @@ class DataBaseManager{
         })
     }
 
-    deleteBook(searchPerams,callback){
+    deleteBook(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -276,8 +276,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateBookSearchParams(searchPerams)){
-                    db.collection(BooksTableName).findOneAndDelete(searchPerams,function(err,res){
+                if(util.ValidateBookSearchParams(searchParams)){
+                    db.collection(BooksTableName).findOneAndDelete(searchParams,function(err,res){
                         db.close();
                         if(err){
                             console.error("[DB-Manager][deleteBook] : Querys failed");
@@ -319,7 +319,7 @@ class DataBaseManager{
         })
     }
 
-    getAppointment(searchPerams, callback){
+    getAppointment(searchParams, callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -327,8 +327,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateAppointmentSearchParams(searchPerams)){
-                    db.collection(AppointmentsTableName).findOne(searchPerams, function(err,res){
+                if(util.ValidateAppointmentSearchParams(searchParams)){
+                    db.collection(AppointmentsTableName).findOne(searchParams, function(err,res){
                         db.close();
                         if(err){
                             console.error('[DB-Manager][getAppointment] : could not retrieve Appointment');
@@ -347,7 +347,7 @@ class DataBaseManager{
         });
     }
 
-    getAppointments(searchPerams,callback){
+    getAppointments(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -355,8 +355,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateAppointmentSearchParams(searchPerams)){
-                    db.collection(AppointmentsTableName).find(searchPerams, function(err,res){
+                if(util.ValidateAppointmentSearchParams(searchParams)){
+                    db.collection(AppointmentsTableName).find(searchParams, function(err,res){
                         db.close();
                         if(err){
                             console.error('[DB-Manager][getAppointments] : could not retrieve Appointments');
@@ -375,7 +375,7 @@ class DataBaseManager{
         })
     }
 
-    updateAppointments(searchPerams,updatePerams,callback){
+    updateAppointments(searchParams,updateParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -383,9 +383,9 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateAppointmentSearchParams(searchPerams) && util.ValidateAppointmentSearchParams(updatePerams)){
-                    var updateParamsFormatted = {$set : updatePerams};
-                    db.collection(AppointmentsTableName).updateOne(searchPerams,updateParamsFormatted, function(err,res){
+                if(util.ValidateAppointmentSearchParams(searchParams) && util.ValidateAppointmentSearchParams(updateParams)){
+                    var updateParamsFormatted = {$set : updateParams};
+                    db.collection(AppointmentsTableName).updateOne(searchParams,updateParamsFormatted, function(err,res){
                         db.close();
                         if(err){
                             console.error('[DB-Manager][updateAppointment] : could not update Appointment');
@@ -404,7 +404,7 @@ class DataBaseManager{
         });
     }
 
-    deleteAppointment(searchPerams,callback){
+    deleteAppointment(searchParams,callback){
         this.MongoClient.connect(this.url,function(err,db){
             if(err){
                 db.close();
@@ -412,8 +412,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateAppointmentSearchParams(searchPerams)){
-                    db.collection(AppointmentsTableName).findOneAndDelete(searchPerams, function(err,res){
+                if(util.ValidateAppointmentSearchParams(searchParams)){
+                    db.collection(AppointmentsTableName).findOneAndDelete(searchParams, function(err,res){
                         db.close()
                         if(err){
                             console.error('[DB-Manager][deleteAppointment] : could not remove appointment');
@@ -452,7 +452,7 @@ class DataBaseManager{
             }
         })
     }
-    getTransaction(searchPerams,callback){
+    getTransaction(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close()
@@ -460,8 +460,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateTransactionSearchParams(searchPerams)){
-                    db.collection(TransactionsTableName).findOne(searchPerams, function(err,res){
+                if(util.ValidateTransactionSearchParams(searchParams)){
+                    db.collection(TransactionsTableName).findOne(searchParams, function(err,res){
                         db.close();
                         if(err){
                             console.error('[DB-Manager][getTransaction] : could not find transaction');
@@ -480,7 +480,7 @@ class DataBaseManager{
         })
     }
 
-    getTransactions(searchPerams,callback){
+    getTransactions(searchParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close()
@@ -488,8 +488,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateTransactionSearchParams(searchPerams)){
-                    db.collection(TransactionsTableName).find(searchPerams, function(err,res){
+                if(util.ValidateTransactionSearchParams(searchParams)){
+                    db.collection(TransactionsTableName).find(searchParams, function(err,res){
                         db.close();
                         if(err){
                             console.error('[DB-Manager][getTransaction] : could not find transaction');
@@ -508,7 +508,7 @@ class DataBaseManager{
         })
     }
 
-    updateTransaction(searchPerams,updatePerams,callback){
+    updateTransaction(searchParams,updateParams,callback){
         this.MongoClient.connect(this.url, function(err,db){
             if(err){
                 db.close();
@@ -516,9 +516,9 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateTransactionSearchParams(searchPerams) && util.ValidateTransactionSearchParams(updatePerams)){
-                    var updateParamsFormatted = {$set : updatePerams};
-                    db.collection(TransactionsTableName).updateOne(searchPerams,updateParamsFormatted, function(err,res){
+                if(util.ValidateTransactionSearchParams(searchParams) && util.ValidateTransactionSearchParams(updateParams)){
+                    var updateParamsFormatted = {$set : updateParams};
+                    db.collection(TransactionsTableName).updateOne(searchParams,updateParamsFormatted, function(err,res){
                         if(err){
                             console.error('[DB-Manager][updateTransaction] : Could not update the Transaction');
                             callback(err,null);
@@ -536,7 +536,7 @@ class DataBaseManager{
         })
     }
 
-    deleteTransatction(searchPerams,callback){
+    deleteTransatction(searchParams,callback){
         this.MongoClient.connect(this.url,function(err,db){
             if(err){
                 db.close();
@@ -544,8 +544,8 @@ class DataBaseManager{
                 callback(err,null);
             }
             else{
-                if(util.ValidateTransactionSearchParams(searchPerams)){
-                    db.collection(TransactionsTableName).findOneAndDelete(searchPerams, function(err,res){
+                if(util.ValidateTransactionSearchParams(searchParams)){
+                    db.collection(TransactionsTableName).findOneAndDelete(searchParams, function(err,res){
                         db.close()
                         if(err){
                             console.error('[DB-Manager][deleteTransaction] : could not remove trasaction');

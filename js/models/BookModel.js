@@ -30,7 +30,7 @@ class BookModel {
     }
 
     _TestModel() {
-        let rnd = Math.random() * (1000 - 1) + 1;
+        let rnd = Math.random() * (10 - 1) + 1;
 
         this.Title = 'Title_' + rnd,
         this.Author = 'Author_' + rnd,

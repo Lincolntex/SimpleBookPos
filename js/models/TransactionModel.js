@@ -28,7 +28,7 @@ class TransactionModel {
     }
 
     _TestModel() {
-        let rnd = Math.random() * (1000 - 1) + 1;
+        let rnd = Math.random() * (10 - 1) + 1;
 
         this.PurchasedItems = ['Test ' + rnd, 'Test2 ' + rnd],
         this.RentedItems ['Test ' + rnd, 'Test2 ' + rnd],

@@ -4,15 +4,15 @@
         <title>Sign In/Up</title>
         <!-- Bootstrap core CSS -->
         <link href="../lib/bootstrap4/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="./../styles/register.css" rel="stylesheet"/>
+        <link href="./../styles/signIn.css" rel="stylesheet"/>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>       
-        <script type="text/javascript" src="./../viewControllers/register.js"></script>
+        <script type="text/javascript" src="./../viewControllers/signInViewController.js"></script>
     </head>
     <body>
         <!-- TOP NAVBAR -->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Dashboard</a>
+            <a class="navbar-brand" href="/">Home</a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,13 +20,19 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Database Manager<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Database Manager<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Schedule</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">IT Tickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
