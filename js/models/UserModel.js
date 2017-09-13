@@ -14,6 +14,7 @@ class UserModel {
     }
 
     CreateUser(fName, lName, uName, password, birthDate, email, phoneNumber, currentRentals, transHist, isAdmin = false){
+        var cdate = new Date(Date.now());
         this.fName = fName;
         this.lName = lName;
         this.uName = uName;
@@ -21,7 +22,7 @@ class UserModel {
         this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.createDate = Date.now();
+        this.createDate = `${cdate.getFullYear()}-${cdate.getMonth()+1}-${cdate.getDate()}`;
         this.isAdmin = isAdmin;
         this.currentRentals = currentRentals;
         this.transHist = transHist;
