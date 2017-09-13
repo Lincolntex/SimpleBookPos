@@ -34,20 +34,15 @@ app.get('/login', function(req,res) {
   res.sendFile(path.join(__dirname, '/public/views/register.html'))
 })
 
-// Allow CORS for now, need to restrict in future
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
-
 // define API endpoints
 app.get('/api/users/:username', function(req, res) {
     db.getUser({'Username' : req.params['username']}, function(err, user) {
       if (err) {
-        return res.send(500, {'error' : err });
+        console.log(err);
+        return res.status(500).send({'error' : err });
       } else {
-        return res.send(200, {'user' : user})
+        console.log(user)
+        return res.status(200).send({'user' : user})
       }
     });
 });
@@ -77,11 +72,11 @@ app.post('/api/users', function(req, res) {
 });
 
 app.delete('/api/users/:username', function(req, res) {
-    db.deleteUser({'Username' : req.params['username']}, function(err, res) {
+    db.deleteUser({'Username' : req.params['username']}, function(err, db_res) {
       if (err) {
-        res.send(500, {'error' : err});
+        return res.status(500).send({'error' : err });
       } else {
-        res.send(200, {'user' : res});
+        return res.status(200).send({'user' : db_res})
       }
     });
 });
@@ -89,7 +84,7 @@ app.delete('/api/users/:username', function(req, res) {
 // update params will be included in the body of the response object
 app.put('/api/users/:username', function(req, res) {
       let updateParams = req.body['updateParams'];
-
+  // TODO
 });
 
 // tell the server to start listening to requests at "localhost:3000/"
