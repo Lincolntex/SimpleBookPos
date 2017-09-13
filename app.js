@@ -34,6 +34,13 @@ app.get('/login', function(req,res) {
   res.sendFile(path.join(__dirname, '/public/views/register.html'))
 })
 
+// Allow CORS for now, need to restrict in future
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
+
 // define API endpoints
 app.get('/api/users/:username', function(req, res) {
     db.getUser({'Username' : req.params['username']}, function(err, user) {
