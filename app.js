@@ -46,7 +46,7 @@ app.get('/api/users/:username', function(req, res) {
 });
 
 // expects user model in form of JSON in request body
-app.post('/api/users/', function(req, res) {
+app.post('/api/users', function(req, res) {
     var user = new UserModel().CreateUser(
         req.body['user']['FirstName'],
         req.body['user']['LastName'],
