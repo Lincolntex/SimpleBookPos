@@ -1,0 +1,32 @@
+body {
+    padding-top: 65px;
+    background: #f4f4f4;
+}
+
+.content-navigator {
+    text-align: center;
+}
+
+.table-nav {
+    background: #212529;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.table-nav-active {
+    color: white !important;
+}
+
+.table-tab {
+    color: rgba(255,255,255,.5);
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.table-tab:hover {
+    color: white !important;
+}
+
+.query-area {
+    margin-bottom: 10px;
+}

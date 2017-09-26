@@ -5,6 +5,7 @@
 */
 const express = require('express')
 const app = express()
+const PORT = 8080;
 let _ = require('lodash');
 let path = require('path');
 let bodyParser = require('body-parser');
@@ -38,6 +39,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 /*
  * Define routes and their corresponding pages that will represent them
 */
+app.get('/database_manager', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/views/databaseManager.html'));
+})
+
+
 app.get('/login', (req,res) => {
   res.sendFile(path.join(__dirname, '/public/views/signIn.html'));
 });
@@ -129,8 +135,8 @@ app.post('/api/login', (req, res) => {
 /*
  * Launch the server on the specified port
 */
-app.listen(process.env.port, () => {
-  console.log(`POS app listening on port ${process.env.port}`);
+app.listen(PORT, () => {
+  console.log(`POS app listening on port ${PORT}`);
 
   // Uncomment the following lines to run the test suites
   // TestSuite.RunTestSuite();

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Manager</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../styles/databaseManager.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="/">Database Manager<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Schedule</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">IT Tickets</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Contact Us</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="row query-area">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="container-fluid content-navigator">
+                <div class="table-nav">
+                    <span><a class="btn table-tab table-nav-active" href="#">Users</a></span>
+                    <span><a class="btn table-tab" href="#">Books</a></span>
+                    <span><a class="btn table-tab" href="#">Appointments</a></span>
+                </div>
+
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search users by email, name or date of birth" aria-describedby="basic-addon1">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row results-area">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="container-fluid">
+                <h3>Results</h3>
+                <div class="list-group results-list">
+                    <a href="#" class="list-group-item list-group-item-action disabled">No results yet, try searching!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../lib/bootstrap4/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../lib/bootstrap4/js/bootstrap.min.js"></script>
+</body>
+</html>
