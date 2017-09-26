@@ -31,5 +31,19 @@ function CreateUser() {
 }
 
 function LoginUser(){
+    var uName = document.getElementById("uName").value;
+    var password = document.getElementById("pw").value;
 
-}
+    axios.post("/api/login", {
+        credentials: {
+            Username: uName,
+            Password: password,
+        }
+    })
+    .then(function(res){
+        console.log(res);
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+ } 
